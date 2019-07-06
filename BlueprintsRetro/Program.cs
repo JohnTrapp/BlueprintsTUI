@@ -8,7 +8,8 @@ namespace BlueprintsRetro
     {
         private static Queue<String> consoleLines = new Queue<String>();
         private static StatsManager statsManager;
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             //Setup
             Console.Title = "Blueprints College Time Manager";
 
@@ -20,7 +21,8 @@ namespace BlueprintsRetro
 
             statsManager = new StatsManager();
 
-            while (true) {
+            while (true)
+            {
                 //Clear the display
                 Console.Clear();
 
@@ -32,20 +34,30 @@ namespace BlueprintsRetro
             }
         }
 
-        private static void AddLine(string input) {
+        private static void AddLine(string input)
+        {
             string theString = input;
-            if (consoleLines.Count == 24) {
+            if (consoleLines.Count == 24)
+            {
                 //If size of array is greater than 24, discard the oldest entry.
                 consoleLines.Dequeue();
             }
-            if (theString.Length > 100) {
+            if (theString.Length > 100)
+            {
                 theString = "Error: Buffer Overflow.";
-            } else if (theString.Length == 0) {
+            }
+            else if (theString.Length == 0)
+            {
                 theString = "Error: No command entered.";
-            } else {
-                try {
+            }
+            else
+            {
+                try
+                {
                     DecodeInput(theString);
-                } catch (CommandNotRecognized e) {
+                }
+                catch (CommandNotRecognized e)
+                {
                     theString = "Command \"" + e + "\" not recognized.";
                 }
             }
@@ -53,18 +65,10 @@ namespace BlueprintsRetro
             consoleLines.Enqueue(theString);
         }
 
-        private static void DecodeInput(string theString) {
-            switch (theString) {
+        private static void DecodeInput(string theString) => new CommandRunner(theString);
 
-                default:
-                    throw new CommandNotRecognized(theString);
-            }
-
-
-            throw new CommandNotRecognized();
-        }
-
-        private static void Print() {
+        private static void Print()
+        {
             Console.WriteLine("+--CONSOLE------------------------------------------------------------------------------------+ +---STATS---+");
             Console.WriteLine("|                                                                                             | |           |");
             Console.WriteLine("|                                                                                             | |           |");
@@ -100,7 +104,8 @@ namespace BlueprintsRetro
             Console.SetCursorPosition(2, 26);
         }
 
-        private static void PrintStats() {
+        private static void PrintStats()
+        {
             Console.SetCursorPosition(100, 7);
             Console.Write(statsManager.Happiness);
 
@@ -114,14 +119,16 @@ namespace BlueprintsRetro
             Console.Write(statsManager.Sleep);
         }
 
-        private static void PrintText() {
+        private static void PrintText()
+        {
             int count = 24;
             Console.SetCursorPosition(2, 24);
 
             String[] array = new String[consoleLines.Count];
             consoleLines.CopyTo(array, 0);
             array.Reverse();
-            for (int i = array.Length - 1; i >= 0; i--) {
+            for (int i = array.Length - 1; i >= 0; i--)
+            {
                 Console.Write(array[i]);
                 Console.SetCursorPosition(2, --count);
             }

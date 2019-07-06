@@ -7,7 +7,8 @@
         public int Health { get; set; }
         public int Sleep { get; set; }
 
-        public StatsManager() {
+        public StatsManager()
+        {
             Happiness = 0;
             Study = 0;
             Health = 0;
