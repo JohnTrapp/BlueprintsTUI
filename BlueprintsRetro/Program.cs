@@ -19,7 +19,7 @@ namespace BlueprintsRetro
             Console.BufferWidth = 110;
             Console.BufferHeight = 29;
 
-            statsManager = new StatsManager();
+            //statsManager = new StatsManager();
 
             while (true)
             {
@@ -107,16 +107,16 @@ namespace BlueprintsRetro
         private static void PrintStats()
         {
             Console.SetCursorPosition(100, 7);
-            Console.Write(statsManager.Happiness);
+            Console.Write(StatsManager.Instance.Happiness);
 
             Console.SetCursorPosition(100, 10);
-            Console.Write(statsManager.Study);
+            Console.Write(StatsManager.Instance.Study);
 
             Console.SetCursorPosition(100, 13);
-            Console.Write(statsManager.Health);
+            Console.Write(StatsManager.Instance.Health);
 
             Console.SetCursorPosition(100, 16);
-            Console.Write(statsManager.Sleep);
+            Console.Write(StatsManager.Instance.Sleep);
         }
 
         private static void PrintText()

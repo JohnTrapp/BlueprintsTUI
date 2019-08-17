@@ -9,23 +9,30 @@ namespace BlueprintsRetro
 
     interface CommandFactory
     {
-        Command GetCommand(String strFullyQualifiedName);
+        Command GetCommand(String str);
     }
 
     class CommandRunner : CommandFactory
     {
-        public CommandRunner(String strFullyQualifiedName)
+        public CommandRunner(String str)
         {
-            try { GetCommand(strFullyQualifiedName).RunCommand(); }
+            try { GetCommand(str).RunCommand(); }
             catch
             {
                 new CommandNotRecognized();
             }
         }
-        public Command GetCommand(string strFullyQualifiedName)
+        public Command GetCommand(string str)
         {
-            Type t = Type.GetType(strFullyQualifiedName);
-            return (Command)Activator.CreateInstance(t);
+            switch (str.ToLower())
+            {
+                case "sleep": return new SleepCommand();
+                case "study": return new StudyCommand();
+                default:
+                    throw new CommandNotRecognized();
+            }
+            /*Type t = Type.GetType(str);
+            return (Command)Activator.CreateInstance(t);*/
         }
     }
 }
